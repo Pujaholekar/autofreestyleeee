@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Admission Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            width: 50%;
+            margin: 50px auto;
+            background-color: white;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            font-size: 1rem;
+            color: #333;
+            display: block;
+            margin-bottom: 5px;
+        }
+        input[type="text"], input[type="email"], input[type="number"], input[type="file"], select {
+            width: 100%;
+            padding: 8px;
+            margin: 5px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 1rem;
+        }
+        input[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 1rem;
+            cursor: pointer;
+        }
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+        .form-group input[type="radio"] {
+            width: auto;
+            margin-right: 10px;
+        }
+        .error {
+            color: red;
+            font-size: 0.875rem;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Student Admission Form</h1>
+        <form id="admission-form" action="#" method="POST" enctype="multipart/form-data">
+            <div class="form-group">
+                <label for="name">Full Name:</label>
+                <input type="text" id="name" name="name" required placeholder="Enter your full name">
+                <div class="error" id="name-error"></div>
+            </div>
+
+            <div class="form-group">
+                <label for="age">Age:</label>
+                <input type="number" id="age" name="age" required placeholder="Enter your age" min="18" max="100">
+                <div class="error" id="age-error"></div>
+            </div>
+
+            <div class="form-group">
+                <label for="gender">Gender:</label>
+                <input type="radio" id="male" name="gender" value="Male" required> Male
+                <input type="radio" id="female" name="gender" value="Female"> Female
+                <input type="radio" id="other" name="gender" value="Other"> Other
+                <div class="error" id="gender-error"></div>
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email Address:</label>
+                <input type="email" id="email" name="email" required placeholder="Enter your email">
+                <div class="error" id="email-error"></div>
+            </div>
+
+            <div class="form-group">
+                <label for="course">Select Course:</label>
+                <select id="course" name="course" required>
+                    <option value="">--Select Course--</option>
+                    <option value="Computer Science">Computer Science</option>
+                    <option value="Electrical Engineering">Electrical Engineering</option>
+                    <option value="Mechanical Engineering">Mechanical Engineering</option>
+                    <option value="Business Administration">Business Administration</option>
+                </select>
+                <div class="error" id="course-error"></div>
+            </div>
+
+            <div class="form-group">
+                <label for="profile-picture">Upload Profile Picture:</label>
+                <input type="file" id="profile-picture" name="profile-picture" accept="image/*" required>
+                <div class="error" id="file-error"></div>
+            </div>
+
+            <input type="submit" value="Submit">
+        </form>
+    </div>
+
+    <script>
+        const form = document.getElementById('admission-form');
+
+        form.addEventListener('submit', function (event) {
+            let isValid = true;
+
+            // Clear previous errors
+            document.querySelectorAll('.error').forEach(el => el.textContent = '');
+
+            // Validate name
+            const name = document.getElementById('name');
+            if (name.value.trim() === '') {
+                document.getElementById('name-error').textContent = 'Name is required';
+                isValid = false;
+            }
+
+            // Validate age
+            const age = document.getElementById('age');
+            if (age.value < 18 || age.value > 100) {
+                document.getElementById('age-error').textContent = 'Please enter a valid age between 18 and 100';
+                isValid = false;
+            }
+
+            // Validate gender
+            const gender = document.querySelector('input[name="gender"]:checked');
+            if (!gender) {
+                document.getElementById('gender-error').textContent = 'Please select a gender';
+                isValid = false;
+            }
+
+            // Validate email
+            const email = document.getElementById('email');
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email.value)) {
+                document.getElementById('email-error').textContent = 'Please enter a valid email address';
+                isValid = false;
+            }
+
+            // Validate course
+            const course = document.getElementById('course');
+            if (course.value === '') {
+                document.getElementById('course-error').textContent = 'Please select a course';
+                isValid = false;
+            }
+
+            // Validate profile picture
+            const profilePicture = document.getElementById('profile-picture');
+            if (profilePicture.files.length === 0) {
+                document.getElementById('file-error').textContent = 'Please upload a profile picture';
+                isValid = false;
+            }
+
+            if (!isValid) {
+                event.preventDefault();
+            }
+        });
+    </script>
+
+</body>
+</html>
