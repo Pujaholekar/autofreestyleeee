@@ -7,38 +7,45 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #f4f4f9;
+            background-color: #1c1c1c;
+            color: #f4f4f4;
             margin: 0;
             padding: 0;
         }
         .container {
             width: 50%;
             margin: 50px auto;
-            background-color: white;
+            background-color: #2a2a2a;
             padding: 20px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
             border-radius: 8px;
         }
         h1 {
             text-align: center;
-            color: #333;
+            color: #f4f4f4;
         }
         .form-group {
             margin-bottom: 15px;
         }
         label {
             font-size: 1rem;
-            color: #333;
+            color: #ddd;
             display: block;
             margin-bottom: 5px;
         }
         input[type="text"], input[type="email"], input[type="number"], input[type="file"], select {
             width: 100%;
-            padding: 8px;
+            padding: 10px;
             margin: 5px 0;
-            border: 1px solid #ccc;
+            border: 1px solid #555;
             border-radius: 4px;
             font-size: 1rem;
+            background-color: #333;
+            color: #f4f4f4;
+        }
+        input[type="text"]:focus, input[type="email"]:focus, input[type="number"]:focus, select:focus {
+            border-color: #4CAF50;
+            outline: none;
         }
         input[type="submit"] {
             width: 100%;
